@@ -1,5 +1,0 @@
-INDEX VERSION 1.132+C:\Users\202010070020\Documents\Lista_Encadeada\.metadata\.plugins\org.eclipse.jdt.core
-3316756927.index
-1557940164.index
-3883275232.index
-1865797976.index
