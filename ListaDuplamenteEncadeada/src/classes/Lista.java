@@ -63,7 +63,21 @@ public class Lista {
 }
 	
 	
+		//método remover do início
 	
+		public void removerDoInicio() {
+			if (this.totalDeElementos == 0) {
+				System.out.println("A lista está vazia!");
+			} else {
+				this.cabeca = this.cabeca.getProxima();
+				if (this.cabeca != null) {
+					this.cabeca.setAnterior(null);
+				} else {
+					this.cauda = null; // Caso a lista fique vazia
+				}
+				this.totalDeElementos--;
+			}
+		}
 
 	
 	//remover do final
