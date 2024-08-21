@@ -1,0 +1,65 @@
+package classes;
+
+public class Lista {
+	
+	private Celula cabeca;
+	private Celula cauda;
+	private int totalDeElementos;
+	
+	
+	//método adicionar no início
+	public void adicionarNoInicio(String nome) {
+		
+		if(this.totalDeElementos==0) {
+			
+			Celula nova = new Celula(nome);
+			this.cabeca = nova;
+			this.cauda = nova;
+			
+		}else {
+			
+			Celula nova = new Celula(this.cabeca, nome);
+			this.cabeca.setAnterior(nova);
+			this.cabeca = nova;
+		}
+		
+		this.totalDeElementos++;
+	}
+	
+	
+	//método adicionar no fim
+	
+	public void adicionarNoFim(String nome) {
+
+	    if (this.totalDeElementos == 0) {
+        //adicionarNoInicio(nome); //pode apenas chamar o método aqui se quiser
+	        Celula nova = new Celula(nome);
+	        this.cabeca = nova;
+	        this.cauda = nova;
+	        
+	    } else {
+	        
+	        Celula nova = new Celula(nome);
+	        this.cauda.setProxima(nova);
+	        this.cauda = nova;
+	    }
+	    
+	    this.totalDeElementos++;
+	}
+	
+	
+	//método imprimir
+	
+	public void imprimir() {
+		
+		Celula aux = this.cabeca;
+		for(int cont=0;cont<this.totalDeElementos;cont++) {
+			System.out.println(aux.getElemento());
+			aux = aux.proxima;
+	
+		}
+
+
+}
+	
+}

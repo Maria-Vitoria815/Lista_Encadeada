@@ -1,0 +1,29 @@
+package classes;
+
+public class Principal {
+	
+	public static void main(String[] args) {
+		
+		Lista l = new Lista();
+		
+		    l.adicionarNoInicio("TesteInicio");
+	        l.adicionarNoInicio("Bruno");
+	      
+	        System.out.println("===== Lista Original =====");
+	        l.imprimir();  // Imprime todos os elementos da lista
+	        
+	        l.adicionarNoInicio("Carlos");
+	        l.adicionarNoInicio("Daniela");
+	        
+	        System.out.println("===== Lista Atualizada =====");
+	        l.imprimir(); 
+	        
+	     
+	        
+	        l.adicionarNoFim("TesteFim");
+	        
+	        System.out.println("===== Lista Atualizada =====");
+	        l.imprimir();
+	}
+
+}
