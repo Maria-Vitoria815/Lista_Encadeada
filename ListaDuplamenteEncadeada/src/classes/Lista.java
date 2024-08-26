@@ -7,7 +7,7 @@ public class Lista {
 	private int totalDeElementos;
 	
 	
-	//método adicionar no início
+	
 	public void adicionarNoInicio(String nome) {
 		
 		if(this.totalDeElementos==0) {
@@ -27,15 +27,15 @@ public class Lista {
 	}
 	
 	
-	//método adicionar no fim
+	
 	
 	public void adicionarNoFim(String nome) {
 
 	    if (this.totalDeElementos == 0) {
-        //adicionarNoInicio(nome); //pode apenas chamar o método aqui se quiser
-	        Celula nova = new Celula(nome);
-	        this.cabeca = nova;
-	        this.cauda = nova;
+        adicionarNoInicio(nome);
+	       // Celula nova = new Celula(nome);
+	      //  this.cabeca = nova;
+	       // this.cauda = nova;
 	        
 	    } else {
 	        
@@ -48,7 +48,7 @@ public class Lista {
 	}
 	
 	
-	//método imprimir
+	
 	
 	public void imprimir() {
 		
@@ -63,80 +63,101 @@ public class Lista {
 }
 	
 	
-		//método remover do início
 	
 		public void removerDoInicio() {
 			if (this.totalDeElementos == 0) {
-				System.out.println("A lista está vazia!");
+				System.out.println("A lista está vazia.");
+				return;
+			}
+		
+			// lembrete vivih: caso a lista só tenha 1 elemento
+			if (this.totalDeElementos == 1) {
+				this.cabeca = null;
+				this.cauda = null;
 			} else {
 				this.cabeca = this.cabeca.getProxima();
-				if (this.cabeca != null) {
-					this.cabeca.setAnterior(null);
-				} else {
-					this.cauda = null; // Caso a lista fique vazia
-				}
-				this.totalDeElementos--;
+				this.cabeca.setAnterior(null);
 			}
+		
+			this.totalDeElementos--;
 		}
+		
 
-	
-	//remover do final
+
+
 	
 	public void removerDoFinal() {
-	    if (this.totalDeElementos == 0) {
-	        System.out.println("A lista está vazia!");
-	    } else if (this.totalDeElementos == 1) {
-	        this.cabeca = null;
-	        this.cauda = null;
-	        this.totalDeElementos = 0;
-	    } else {
-	        this.cauda = this.cauda.getAnterior();
-	        this.cauda.setProxima(null);
-	        this.totalDeElementos--;
-	    }
+		if (this.totalDeElementos == 0) {
+			System.out.println("A lista está vazia.");
+			return;
+		}
+	
+	
+		if (this.totalDeElementos == 1) {
+			this.cabeca = null;
+			this.cauda = null;
+		} else {
+			this.cauda = this.cauda.getAnterior();
+			this.cauda.setProxima(null);
+		}
+	
+		this.totalDeElementos--;
 	}
+	
 
 	
-	//adicionar por posição
+
 	
 	public void adicionarPorPosicao(int posicao, String nome) {
-	    if (posicao == 0) {
-	        adicionarNoInicio(nome);
-	    } else if (posicao == this.totalDeElementos) {
-	        adicionarNoFim(nome);
-	    } else if (posicao > 0 && posicao < this.totalDeElementos) {
-	        Celula atual = this.cabeca;
-	        for (int i = 0; i < posicao - 1; i++) {
-	            atual = atual.getProxima();
-	        }
-	        Celula nova = new Celula(atual.getProxima(), nome);
-	        atual.getProxima().setAnterior(nova);
-	        atual.setProxima(nova);
-	        this.totalDeElementos++;
-	    } else {
-	        System.out.println("Posição inválida!");
-	    }
+		if (posicao < 0) {
+			System.out.println("Posição inválida.");
+			return;
+		}
+	
+		if (posicao == 0) {
+			adicionarNoInicio(nome);
+		} else if (posicao >= this.totalDeElementos) {
+			adicionarNoFim(nome);
+		} else {
+			Celula atual = this.cabeca;
+			for (int i = 0; i < posicao - 1; i++) {
+				atual = atual.getProxima();
+			}
+	
+			Celula nova = new Celula(atual.getProxima(), nome);
+			atual.setProxima(nova);
+			nova.getProxima().setAnterior(nova);
+	
+			this.totalDeElementos++;
+		}
 	}
 	
-//	remover por posição
+	
 
-	public void removerPorPosicao(int posicao) {
-	    if (posicao == 0) {
-	        removerDoInicio();
-	    } else if (posicao == this.totalDeElementos - 1) {
-	        removerDoFinal();
-	    } else if (posicao > 0 && posicao < this.totalDeElementos) {
-	        Celula atual = this.cabeca;
-	        for (int i = 0; i < posicao; i++) {
-	            atual = atual.getProxima();
-	        }
-	        atual.getAnterior().setProxima(atual.getProxima());
-	        atual.getProxima().setAnterior(atual.getAnterior());
-	        this.totalDeElementos--;
-	    } else {
-	        System.out.println("Posição inválida!");
-	    }
-	}
+
+public void removerPorPosicao(int posicao) {
+    if (posicao < 0 || posicao >= this.totalDeElementos) {
+        System.out.println("Posição inválida.");
+        return;
+    }
+
+    if (posicao == 0) {
+        removerDoInicio();
+    } else if (posicao == this.totalDeElementos - 1) {
+        removerDoFinal();
+    } else {
+        Celula atual = this.cabeca;
+        for (int i = 0; i < posicao - 1; i++) {
+            atual = atual.getProxima();
+        }
+
+        Celula proxima = atual.getProxima().getProxima();
+        atual.setProxima(proxima);
+        proxima.setAnterior(atual);
+
+        this.totalDeElementos--;
+    }
+}
 
 	
 	
